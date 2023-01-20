@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>hu.kovacspeterzoltan.bootcamp</groupId>
-    <artifactId>vehicle-register</artifactId>
+    <artifactId>vehicleregister</artifactId>
     <version>1.0</version>
 
     <properties>
