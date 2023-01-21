@@ -1,4 +1,4 @@
-package hu.kovacspeterzoltan.bootcamp.vehicleregister;
+package hu.kovacspeterzoltan.bootcamp.vehicleregister.entity;
 
 public class VehicleEntity {
     public String registrationNumber;
