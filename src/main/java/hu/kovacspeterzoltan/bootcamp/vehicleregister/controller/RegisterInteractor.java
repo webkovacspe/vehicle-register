@@ -1,11 +1,15 @@
 package hu.kovacspeterzoltan.bootcamp.vehicleregister.controller;
 
-import hu.kovacspeterzoltan.bootcamp.vehicleregister.dao.VehicleStorageInterface;
+import hu.kovacspeterzoltan.bootcamp.vehicleregister.dao.VehicleRegisterInteractorInterface;
+import hu.kovacspeterzoltan.bootcamp.vehicleregister.dao.VehicleRegisterStorageInterface;
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.entity.VehicleEntity;
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.parser.VehicleParser;
 
-public class Register implements RegisterInterface {
-    VehicleStorageInterface storage;
+public class RegisterInteractor implements VehicleRegisterInteractorInterface {
+    VehicleRegisterStorageInterface storage;
+    public void setStorageImp(VehicleRegisterStorageInterface storageImp) {
+        storage = storageImp;
+    }
     @Override
     public void saveVehicle(String vehicleJsonString) {
         VehicleParser parser = new VehicleParser();
@@ -15,7 +19,7 @@ public class Register implements RegisterInterface {
     }
 
     @Override
-    public void getVehicleByRegisterNumber(String registerNumber) {
+    public void getVehicleByRegisterNumber(String registrationNumber) {
 
     }
 }
