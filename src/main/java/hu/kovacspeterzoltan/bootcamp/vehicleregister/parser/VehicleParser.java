@@ -10,6 +10,28 @@ public class VehicleParser {
         stringToJSONObject(vehicleJsonString);
         return getVehicleEntity();
     }
+    public JSONObject jsonStringToRegistrationNumber(String vehicleJsonString) {
+        stringToJSONObject(vehicleJsonString);
+        return jsonObject;
+    }
+    public String vehicleEntityToJsonString(VehicleEntity vehicle) {
+        vehicleEntityToJson(vehicle);
+        return jsonObject.toString();
+    }
+    private void vehicleEntityToJson(VehicleEntity vehicle) {
+        try {
+            jsonObject = new JSONObject();
+            jsonObject.put("registrationNumber", vehicle.registrationNumber);
+            jsonObject.put("vehicleRegister", vehicle.vehicleRegister);
+            jsonObject.put("vehicle", vehicle.vehicle);
+            jsonObject.put("make", vehicle.make);
+            jsonObject.put("model", vehicle.model);
+            jsonObject.put("numberOfSeats", vehicle.numberOfSeats);
+            jsonObject.put("vehicleType", vehicle.vehicleType);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
     private void stringToJSONObject(String vehicleJsonString) {
         try {
             jsonObject = new JSONObject(vehicleJsonString);
@@ -35,7 +57,7 @@ public class VehicleParser {
                 value = jsonObject.getString(key);
             }
         } catch (JSONException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return value;
     }
@@ -46,7 +68,7 @@ public class VehicleParser {
                 value = jsonObject.getInt(key);
             }
         } catch (JSONException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return value;
     }

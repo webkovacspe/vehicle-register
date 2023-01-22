@@ -5,10 +5,16 @@ import hu.kovacspeterzoltan.bootcamp.vehicleregister.dao.VehicleRegisterPresente
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.dao.VehicleRegisterStorageInterface;
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.entity.VehicleEntity;
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.parser.VehicleParser;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class RegisterInteractor implements VehicleRegisterInteractorInterface {
     private VehicleRegisterStorageInterface storage;
     private VehicleRegisterPresenterInterface presenter;
+    private final VehicleParser parser;
+    public RegisterInteractor() {
+        parser = new VehicleParser();
+    }
     public void setStorageImp(VehicleRegisterStorageInterface storageImp) {
         storage = storageImp;
     }
@@ -17,16 +23,19 @@ public class RegisterInteractor implements VehicleRegisterInteractorInterface {
     }
     @Override
     public void saveVehicle(String vehicleJsonString) {
-        VehicleParser parser = new VehicleParser();
-
         VehicleEntity vehicle = parser.jsonStringToVehicleEntity(vehicleJsonString);
         storage.saveVehicle(vehicle);
 
-        presenter.displaySaveMessage("Sikeres mentés");
+        presenter.displayMessage("Sikeres mentés");
     }
-
     @Override
-    public void getVehicleByRegisterNumber(String registrationNumber) {
-
+    public void getVehicleByRegisterNumber(String vehicleJsonString) throws JSONException {
+        JSONObject jsonObject = parser.jsonStringToRegistrationNumber(vehicleJsonString);
+        VehicleEntity vehicle = storage.getVehicle(jsonObject.getString("registrationNumber"));
+        if (vehicle == null) {
+            presenter.displayMessage("A keresett rendszám nincs rögzítve");
+        } else {
+            presenter.displayJsonRequest(parser.vehicleEntityToJsonString(vehicle));
+        }
     }
 }
