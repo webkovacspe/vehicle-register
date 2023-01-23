@@ -1,4 +1,4 @@
-package hu.kovacspeterzoltan.bootcamp.vehicleregister.parser;
+package hu.kovacspeterzoltan.bootcamp.vehicleregister.validator;
 
 public class InvalidJsonStringException extends RuntimeException {
 }

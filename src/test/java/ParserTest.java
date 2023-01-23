@@ -1,5 +1,5 @@
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.entity.VehicleEntity;
-import hu.kovacspeterzoltan.bootcamp.vehicleregister.parser.InvalidJsonStringException;
+import hu.kovacspeterzoltan.bootcamp.vehicleregister.validator.InvalidJsonStringException;
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.parser.VehicleParser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

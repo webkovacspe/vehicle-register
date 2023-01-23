@@ -5,6 +5,7 @@ import hu.kovacspeterzoltan.bootcamp.vehicleregister.dao.VehicleRegisterPresente
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.dao.VehicleRegisterStorageInterface;
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.entity.VehicleEntity;
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.parser.VehicleParser;
+import hu.kovacspeterzoltan.bootcamp.vehicleregister.validator.NewVehicleRegistrationValidator;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,8 +13,10 @@ public class RegisterInteractor implements VehicleRegisterInteractorInterface {
     private VehicleRegisterStorageInterface storage;
     private VehicleRegisterPresenterInterface presenter;
     private final VehicleParser parser;
+    private final NewVehicleRegistrationValidator newVehicleValidator;
     public RegisterInteractor() {
         parser = new VehicleParser();
+        newVehicleValidator = new NewVehicleRegistrationValidator();
     }
     public void setStorageImp(VehicleRegisterStorageInterface storageImp) {
         storage = storageImp;
@@ -23,6 +26,8 @@ public class RegisterInteractor implements VehicleRegisterInteractorInterface {
     }
     @Override
     public void saveVehicle(String vehicleJsonString) {
+        newVehicleValidator.jsonValidator(vehicleJsonString);
+
         VehicleEntity vehicle = parser.jsonStringToVehicleEntity(vehicleJsonString);
         storage.saveVehicle(vehicle);
 

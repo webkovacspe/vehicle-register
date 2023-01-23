@@ -1,6 +1,7 @@
 package hu.kovacspeterzoltan.bootcamp.vehicleregister.parser;
 
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.entity.VehicleEntity;
+import hu.kovacspeterzoltan.bootcamp.vehicleregister.validator.InvalidJsonStringException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,7 +42,7 @@ public class VehicleParser {
     }
     private VehicleEntity getVehicleEntity() {
         VehicleEntity vehicle = new VehicleEntity();
-        vehicle.registrationNumber = getStringValue("registrationNumber");
+        vehicle.registrationNumber = getStringValue("registrationNumber").toUpperCase();
         vehicle.vehicleRegister = getStringValue("vehicleRegister");
         vehicle.vehicle = getStringValue("vehicle");
         vehicle.make = getStringValue("make");
