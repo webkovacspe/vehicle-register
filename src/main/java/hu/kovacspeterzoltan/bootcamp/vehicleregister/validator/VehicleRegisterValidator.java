@@ -3,10 +3,9 @@ package hu.kovacspeterzoltan.bootcamp.vehicleregister.validator;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NewVehicleRegistrationValidator {
+public class VehicleRegisterValidator {
     private static final String REGISTRATIONNUMBER = "registrationNumber";
     JSONObject jsonObject;
     public void jsonValidator(String jsonString) {

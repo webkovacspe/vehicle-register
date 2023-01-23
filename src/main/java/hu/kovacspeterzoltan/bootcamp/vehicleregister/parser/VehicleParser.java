@@ -41,12 +41,13 @@ public class VehicleParser {
     }
     private VehicleEntity getVehicleEntity() {
         VehicleEntity vehicle = new VehicleEntity();
-        vehicle.registrationNumber = getStringValue("registrationNumber").toUpperCase();
+        vehicle.registrationNumber = getStringValue("registrationNumber");
         vehicle.vehicleRegister = getStringValue("vehicleRegister");
         vehicle.make = getStringValue("make");
         vehicle.model = getStringValue("model");
         vehicle.numberOfSeats = getIntValue("numberOfSeats");
         vehicle.vehicleType = getStringValue("vehicleType");
+        vehicle.registrationNumber = vehicle.registrationNumber.toUpperCase();
         return vehicle;
     }
     private String getStringValue(String key) {

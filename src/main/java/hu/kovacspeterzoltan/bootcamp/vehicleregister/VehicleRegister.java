@@ -1,27 +1,27 @@
-package hu.kovacspeterzoltan.bootcamp.vehicleregister.interactor;
+package hu.kovacspeterzoltan.bootcamp.vehicleregister;
 
-import hu.kovacspeterzoltan.bootcamp.vehicleregister.dao.VehicleRegisterInteractorInterface;
-import hu.kovacspeterzoltan.bootcamp.vehicleregister.dao.VehicleRegisterPresenterInterface;
-import hu.kovacspeterzoltan.bootcamp.vehicleregister.dao.VehicleRegisterStorageInterface;
+import hu.kovacspeterzoltan.bootcamp.vehicleregister.api.VehicleRegisterAPI;
+import hu.kovacspeterzoltan.bootcamp.vehicleregister.api.VehicleRegisterPresenter;
+import hu.kovacspeterzoltan.bootcamp.vehicleregister.storage.VehicleRegisterStorage;
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.entity.VehicleEntity;
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.parser.VehicleParser;
-import hu.kovacspeterzoltan.bootcamp.vehicleregister.validator.NewVehicleRegistrationValidator;
+import hu.kovacspeterzoltan.bootcamp.vehicleregister.validator.VehicleRegisterValidator;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class RegisterInteractor implements VehicleRegisterInteractorInterface {
-    private VehicleRegisterStorageInterface storage;
-    private VehicleRegisterPresenterInterface presenter;
+public class VehicleRegister implements VehicleRegisterAPI {
+    private VehicleRegisterStorage storage;
+    private VehicleRegisterPresenter presenter;
     private final VehicleParser parser;
-    private final NewVehicleRegistrationValidator newVehicleValidator;
-    public RegisterInteractor() {
+    private final VehicleRegisterValidator newVehicleValidator;
+    public VehicleRegister() {
         parser = new VehicleParser();
-        newVehicleValidator = new NewVehicleRegistrationValidator();
+        newVehicleValidator = new VehicleRegisterValidator();
     }
-    public void setStorageImp(VehicleRegisterStorageInterface storageImp) {
+    public void setStorageImp(VehicleRegisterStorage storageImp) {
         storage = storageImp;
     }
-    public void setPresenterImp(VehicleRegisterPresenterInterface presenterImp) {
+    public void setPresenterImp(VehicleRegisterPresenter presenterImp) {
         presenter = presenterImp;
     }
     @Override
@@ -36,7 +36,7 @@ public class RegisterInteractor implements VehicleRegisterInteractorInterface {
     @Override
     public void findVehicleByRegistrationNumber(String vehicleJsonString) throws JSONException {
         JSONObject jsonObject = parser.jsonStringToRegistrationNumber(vehicleJsonString);
-        VehicleEntity vehicle = storage.getVehicle(jsonObject.getString("registrationNumber"));
+        VehicleEntity vehicle = storage.findVehicle(jsonObject.getString("registrationNumber").toUpperCase());
         String request;
         if (vehicle == null) {
 //            presenter.displayMessage("A keresett rendszám nincs rögzítve");
