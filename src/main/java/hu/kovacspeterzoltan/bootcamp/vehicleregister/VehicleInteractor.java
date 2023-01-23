@@ -34,18 +34,22 @@ public class VehicleInteractor implements VehicleRegisterAPI {
         presenter.displayMessage("Sikeres mentés");
     }
     @Override
-    public void findVehicleByRegistrationNumber(String vehicleJsonString) throws JSONException {
-        JSONObject jsonObject = parser.jsonStringToRegistrationNumber(vehicleJsonString);
-        VehicleEntity vehicle = storage.findVehicle(jsonObject.getString("registrationNumber").toUpperCase());
-        String request;
-        if (vehicle == null) {
+    public void findVehicleByRegistrationNumber(String vehicleJsonString) {
+        try {
+            JSONObject jsonObject = parser.jsonStringToRegistrationNumber(vehicleJsonString);
+            VehicleEntity vehicle = storage.findVehicle(jsonObject.getString("registrationNumber").toUpperCase());
+            String request;
+            if (vehicle == null) {
 //            presenter.displayMessage("A keresett rendszám nincs rögzítve");
-            JSONObject error = new JSONObject();
-            error.put("errorMessage", "A keresett rendszám nincs rögzítve");
-            request = error.toString();
-        } else {
-            request = parser.vehicleEntityToJsonString(vehicle);
+                JSONObject error = new JSONObject();
+                error.put("errorMessage", "A keresett rendszám nincs rögzítve");
+                request = error.toString();
+            } else {
+                request = parser.vehicleEntityToJsonString(vehicle);
+            }
+            presenter.displayJsonRequest(request);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        presenter.displayJsonRequest(request);
     }
 }

@@ -4,5 +4,5 @@ import org.json.JSONException;
 
 public interface VehicleRegisterAPI {
     void saveVehicle(String vehicleJsonString);
-    void findVehicleByRegistrationNumber(String registrationNumber) throws JSONException;
+    void findVehicleByRegistrationNumber(String registrationNumber);
 }
