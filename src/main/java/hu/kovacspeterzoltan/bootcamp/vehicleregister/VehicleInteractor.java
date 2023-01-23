@@ -47,7 +47,7 @@ public class VehicleInteractor implements VehicleRegisterAPI {
             } else {
                 request = parser.vehicleEntityToJsonString(vehicle);
             }
-            presenter.displayJsonRequest(request);
+            presenter.displayJsonResponse(request);
         } catch (JSONException e) {
             e.printStackTrace();
         }
