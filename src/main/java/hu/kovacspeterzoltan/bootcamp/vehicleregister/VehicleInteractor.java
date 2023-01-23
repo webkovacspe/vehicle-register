@@ -1,27 +1,27 @@
 package hu.kovacspeterzoltan.bootcamp.vehicleregister;
 
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.api.VehicleRegisterAPI;
-import hu.kovacspeterzoltan.bootcamp.vehicleregister.api.VehicleRegisterPresenter;
-import hu.kovacspeterzoltan.bootcamp.vehicleregister.storage.VehicleRegisterStorage;
+import hu.kovacspeterzoltan.bootcamp.vehicleregister.api.VehicleRegisterPresenterInterface;
+import hu.kovacspeterzoltan.bootcamp.vehicleregister.storage.VehicleRegisterStorageInterface;
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.entity.VehicleEntity;
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.parser.VehicleParser;
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.validator.VehicleRegisterValidator;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class VehicleRegister implements VehicleRegisterAPI {
-    private VehicleRegisterStorage storage;
-    private VehicleRegisterPresenter presenter;
+public class VehicleInteractor implements VehicleRegisterAPI {
+    private VehicleRegisterStorageInterface storage;
+    private VehicleRegisterPresenterInterface presenter;
     private final VehicleParser parser;
     private final VehicleRegisterValidator newVehicleValidator;
-    public VehicleRegister() {
+    public VehicleInteractor() {
         parser = new VehicleParser();
         newVehicleValidator = new VehicleRegisterValidator();
     }
-    public void setStorageImp(VehicleRegisterStorage storageImp) {
+    public void setStorageImp(VehicleRegisterStorageInterface storageImp) {
         storage = storageImp;
     }
-    public void setPresenterImp(VehicleRegisterPresenter presenterImp) {
+    public void setPresenterImp(VehicleRegisterPresenterInterface presenterImp) {
         presenter = presenterImp;
     }
     @Override
