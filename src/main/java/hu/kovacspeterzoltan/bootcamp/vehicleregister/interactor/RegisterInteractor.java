@@ -1,4 +1,4 @@
-package hu.kovacspeterzoltan.bootcamp.vehicleregister.controller;
+package hu.kovacspeterzoltan.bootcamp.vehicleregister.interactor;
 
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.dao.VehicleRegisterInteractorInterface;
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.dao.VehicleRegisterPresenterInterface;
@@ -34,13 +34,18 @@ public class RegisterInteractor implements VehicleRegisterInteractorInterface {
         presenter.displayMessage("Sikeres mentés");
     }
     @Override
-    public void getVehicleByRegisterNumber(String vehicleJsonString) throws JSONException {
+    public void findVehicleByRegistrationNumber(String vehicleJsonString) throws JSONException {
         JSONObject jsonObject = parser.jsonStringToRegistrationNumber(vehicleJsonString);
         VehicleEntity vehicle = storage.getVehicle(jsonObject.getString("registrationNumber"));
+        String request;
         if (vehicle == null) {
-            presenter.displayMessage("A keresett rendszám nincs rögzítve");
+//            presenter.displayMessage("A keresett rendszám nincs rögzítve");
+            JSONObject error = new JSONObject();
+            error.put("errorMessage", "A keresett rendszám nincs rögzítve");
+            request = error.toString();
         } else {
-            presenter.displayJsonRequest(parser.vehicleEntityToJsonString(vehicle));
+            request = parser.vehicleEntityToJsonString(vehicle);
         }
+        presenter.displayJsonRequest(request);
     }
 }

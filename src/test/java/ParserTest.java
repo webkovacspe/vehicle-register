@@ -26,7 +26,6 @@ class ParserTest {
             {
               "registrationNumber":"AA:BB-123",
               "vehicleRegister":"Alma",
-              "vehicle":"vehicle",
               "make":"Opel",
               "model":"Astra",
               "numberOfSeats":5,
@@ -36,7 +35,6 @@ class ParserTest {
         VehicleEntity m1 = parser.jsonStringToVehicleEntity(jsonString);
         Assertions.assertEquals("AA:BB-123", m1.registrationNumber);
         Assertions.assertEquals("Alma", m1.vehicleRegister);
-        Assertions.assertEquals("vehicle", m1.vehicle);
         Assertions.assertEquals("Opel", m1.make);
         Assertions.assertEquals("Astra", m1.model);
         Assertions.assertEquals(5, m1.numberOfSeats);

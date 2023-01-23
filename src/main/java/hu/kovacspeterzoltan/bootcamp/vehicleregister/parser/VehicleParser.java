@@ -24,7 +24,6 @@ public class VehicleParser {
             jsonObject = new JSONObject();
             jsonObject.put("registrationNumber", vehicle.registrationNumber);
             jsonObject.put("vehicleRegister", vehicle.vehicleRegister);
-            jsonObject.put("vehicle", vehicle.vehicle);
             jsonObject.put("make", vehicle.make);
             jsonObject.put("model", vehicle.model);
             jsonObject.put("numberOfSeats", vehicle.numberOfSeats);
@@ -44,7 +43,6 @@ public class VehicleParser {
         VehicleEntity vehicle = new VehicleEntity();
         vehicle.registrationNumber = getStringValue("registrationNumber").toUpperCase();
         vehicle.vehicleRegister = getStringValue("vehicleRegister");
-        vehicle.vehicle = getStringValue("vehicle");
         vehicle.make = getStringValue("make");
         vehicle.model = getStringValue("model");
         vehicle.numberOfSeats = getIntValue("numberOfSeats");
