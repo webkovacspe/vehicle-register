@@ -1,8 +1,5 @@
 package hu.kovacspeterzoltan.bootcamp.vehicleregister.api;
 
-import org.json.JSONException;
-
-public interface VehicleRegisterAPI {
-    void saveVehicle(String vehicleJsonString);
+public interface VehicleRegisterFindAPI {
     void findVehicleByRegistrationNumber(String registrationNumber);
 }

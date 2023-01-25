@@ -1,7 +1,8 @@
 package hu.kovacspeterzoltan.bootcamp.vehicleregister;
 
-import hu.kovacspeterzoltan.bootcamp.vehicleregister.api.VehicleRegisterAPI;
+import hu.kovacspeterzoltan.bootcamp.vehicleregister.api.VehicleRegisterFindAPI;
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.api.VehicleRegisterPresenterInterface;
+import hu.kovacspeterzoltan.bootcamp.vehicleregister.api.VehicleRegisterSaveVehicleAPI;
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.storage.VehicleRegisterStorageInterface;
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.entity.VehicleEntity;
 import hu.kovacspeterzoltan.bootcamp.vehicleregister.parser.VehicleParser;
@@ -9,7 +10,7 @@ import hu.kovacspeterzoltan.bootcamp.vehicleregister.validator.VehicleRegisterVa
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class VehicleInteractor implements VehicleRegisterAPI {
+public class VehicleInteractor implements VehicleRegisterSaveVehicleAPI, VehicleRegisterFindAPI {
     private VehicleRegisterStorageInterface storage;
     private VehicleRegisterPresenterInterface presenter;
     private final VehicleParser parser;
@@ -40,10 +41,9 @@ public class VehicleInteractor implements VehicleRegisterAPI {
             VehicleEntity vehicle = storage.findVehicle(jsonObject.getString("registrationNumber").toUpperCase());
             String request;
             if (vehicle == null) {
-//            presenter.displayMessage("A keresett rendszám nincs rögzítve");
-                JSONObject error = new JSONObject();
-                error.put("errorMessage", "A keresett rendszám nincs rögzítve");
-                request = error.toString();
+                JSONObject errorJson = new JSONObject();
+                errorJson.put("errorMessage", "A keresett rendszám nincs rögzítve");
+                request = errorJson.toString();
             } else {
                 request = parser.vehicleEntityToJsonString(vehicle);
             }
