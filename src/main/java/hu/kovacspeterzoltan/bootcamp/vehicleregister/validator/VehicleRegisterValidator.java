@@ -9,10 +9,10 @@ public class VehicleRegisterValidator {
     private static final String REGISTRATIONNUMBER = "registrationNumber";
     JSONObject jsonObject;
     public void jsonValidator(String jsonString) {
-        stringIsValidJson(jsonString);
+        isValidJson(jsonString);
         structureIsValid();
     }
-    private void stringIsValidJson(String jsonString) {
+    private void isValidJson(String jsonString) {
         try {
             jsonObject = new JSONObject(jsonString);
         } catch (JSONException e) {
